@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.List;
 
 public class GameCell extends Rectangle implements Discoverable {
-    private boolean isMine;
+    private boolean containsMine;
     private int indicator;
     private int locationX;
     private int locationY;
@@ -24,5 +24,21 @@ public class GameCell extends Rectangle implements Discoverable {
     @Override
     public List<Node> getNeighbours() {
         return null;
+    }
+
+    public boolean isContainsMine() {
+        return containsMine;
+    }
+
+    public void setContainsMine(boolean containsMine) {
+        this.containsMine = containsMine;
+    }
+
+    public int getIndicator() {
+        return indicator;
+    }
+
+    public void setIndicator(int indicator) {
+        this.indicator = indicator;
     }
 }
