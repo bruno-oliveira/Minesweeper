@@ -1,11 +1,14 @@
 package sample;
 
 import gameLogic.GameCell;
+import gameLogic.StackedGameCell;
 import generators.BombPositionGenerator;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -19,25 +22,30 @@ public class Main extends Application {
         Pane root = new Pane(); //Parent (instead of Pane) only allows to get an unmodifiable list
         primaryStage.setTitle("Minesweeper");
         int[] bombs = BombPositionGenerator.getRandomFrom64();
-        GameCell[][] gameBoard = new GameCell[8][8];
+        StackedGameCell[][] gameBoard = new StackedGameCell[8][8];
         Controller gameManager = new Controller(gameBoard);
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                gameBoard[i][j] = new GameCell(400 / 8 * i, 400 / 8 * j);
+                gameBoard[i][j] = new StackedGameCell(new GameCell(400 / 8 * i, 400 / 8 * j), new Text("a"));
+                //gameBoard[i][j].setGameCell(new GameCell(400 / 8 * i, 400 / 8 * j));
             }
         }
         for (int bomb : bombs) {
             int xPos = bomb % 8 - 1;
             int yPos = bomb / 8;
-            gameBoard[xPos < 0 ? 8 - 1 : xPos][yPos].setContainsMine(true);
-            gameBoard[xPos < 0 ? 8 - 1 : xPos][yPos].setFill(Color.RED);
+            gameBoard[xPos < 0 ? 8 - 1 : xPos][yPos].getGameCell().setContainsMine(true);
+            gameBoard[xPos < 0 ? 8 - 1 : xPos][yPos].getGameCell().setFill(Color.RED);
         }
 
         gameManager.setGameBoard(gameBoard);
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                root.getChildren().add(gameManager.getGameBoard()[i][j]);
+                StackPane pane = new StackPane(gameBoard[i][j].getGameCell(), new Text("1"));
+                pane.setLayoutX(gameBoard[i][j].getGameCell().getLayoutX());
+                pane.setLayoutY(gameBoard[i][j].getGameCell().getLayoutY());
+                gameBoard[i][j].setStackedCell(pane);
+                root.getChildren().add(pane);
                 // gameBoard[i][j] = new GameCell(400 / 8 * i, 400 / 8 * j);
             }
         }

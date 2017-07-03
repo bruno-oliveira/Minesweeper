@@ -1,19 +1,19 @@
 package sample;
 
-import gameLogic.GameCell;
+import gameLogic.StackedGameCell;
 
 class Controller {
-    private GameCell[][] gameBoard;
+    private StackedGameCell[][] gameBoard;
 
-    Controller(GameCell[][] gameBoard) {
+    Controller(StackedGameCell[][] gameBoard) {
         this.gameBoard = gameBoard;
     }
 
-    GameCell[][] getGameBoard() {
+    StackedGameCell[][] getGameBoard() {
         return gameBoard;
     }
 
-    void setGameBoard(GameCell[][] gameBoard) {
+    void setGameBoard(StackedGameCell[][] gameBoard) {
         this.gameBoard = gameBoard;
     }
 }
