@@ -1,8 +1,6 @@
 package gameLogic;
 
 import gameUtils.CellPosition;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -24,14 +22,8 @@ public class GameCell extends Rectangle implements Discoverable {
         super.setLayoutX(locationX * 1.0);
         super.setLayoutY(locationY * 1.0);
         super.setStroke(Color.BLACK);
-        super.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                GameCell.super.setOpacity(0.2);
-                System.out.println("The number of neighbours is " + getNeighbours());
 
-            }
-        });
+
     }
 
     @Override

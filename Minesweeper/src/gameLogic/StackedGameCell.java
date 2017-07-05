@@ -1,5 +1,7 @@
 package gameLogic;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
@@ -16,14 +18,28 @@ public class StackedGameCell {
     public StackedGameCell(GameCell gameCell, Text cellText) {
         this.gameCell = gameCell;
         this.cellText = cellText;
+        gameCell.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                gameCell.setOpacity(0.2);
+                cellTextVisible(true);
+                System.out.println("The number of neighbours is " + gameCell.getIndicator());
+
+            }
+        });
     }
 
+    public void cellTextVisible(boolean visibility) {
+        this.cellText.setVisible(visibility);
+
+    }
     public Text getCellText() {
         return cellText;
     }
 
     public void setCellText(Text cellText) {
         this.cellText = cellText;
+        this.cellText.setVisible(false);
     }
 
     public GameCell getGameCell() {

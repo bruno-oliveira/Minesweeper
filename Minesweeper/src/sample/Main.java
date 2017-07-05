@@ -26,7 +26,7 @@ public class Main extends Application {
         Controller gameManager = new Controller(gameBoard);
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                gameBoard[i][j] = new StackedGameCell(new GameCell(400 / 8 * i, 400 / 8 * j), new Text("a"));
+                gameBoard[i][j] = new StackedGameCell(new GameCell(400 / 8 * i, 400 / 8 * j), new Text(""));
                 //gameBoard[i][j].setGameCell(new GameCell(400 / 8 * i, 400 / 8 * j));
             }
         }
@@ -41,10 +41,15 @@ public class Main extends Application {
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                StackPane pane = new StackPane(gameBoard[i][j].getGameCell(), new Text("1"));
+                gameManager.neighbourBombsOf(i, j);
+                gameBoard[i][j].setCellText(new Text(gameBoard[i][j].getGameCell().getIndicator() + ""));
+
+                StackPane pane = new StackPane(gameBoard[i][j].getGameCell(), gameBoard[i][j].getCellText());
                 pane.setLayoutX(gameBoard[i][j].getGameCell().getLayoutX());
                 pane.setLayoutY(gameBoard[i][j].getGameCell().getLayoutY());
+
                 gameBoard[i][j].setStackedCell(pane);
+
                 root.getChildren().add(pane);
                 // gameBoard[i][j] = new GameCell(400 / 8 * i, 400 / 8 * j);
             }
