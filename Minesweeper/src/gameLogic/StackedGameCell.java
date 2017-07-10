@@ -38,6 +38,7 @@ public class StackedGameCell {
                 window.getDialogPane().getButtonTypes().add(new ButtonType("Quit", ButtonBar.ButtonData.CANCEL_CLOSE));
                 window.setContentText("Game over");
                 window.showAndWait();
+
                 Platform.exit();
 
 
