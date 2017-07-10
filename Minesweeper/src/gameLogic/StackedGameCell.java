@@ -1,8 +1,10 @@
 package gameLogic;
 
+import javafx.application.Platform;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -21,7 +23,7 @@ public class StackedGameCell {
     public StackedGameCell(GameCell gameCell, Text cellText) {
         this.gameCell = gameCell;
         this.cellText = cellText;
-        gameCell.setOnMouseClicked(mouseEvent -> {
+        gameCell.setOnMouseClicked((MouseEvent mouseEvent) -> {
             if (!gameCell.isContainsMine()) {
 
                 gameCell.setOpacity(0.2);
@@ -33,15 +35,12 @@ public class StackedGameCell {
                 Pane gameOver = new Pane();
                 Dialog<String> window = new Dialog<>();
 
-//                Button btn1 = new Button("Quit");
-//                btn1.setOnMouseClicked(mouseEvent1 -> Platform.exit());
-
-
                 window.getDialogPane().getButtonTypes().add(new ButtonType("Quit", ButtonBar.ButtonData.CANCEL_CLOSE));
-
-
                 window.setContentText("Game over");
                 window.showAndWait();
+                Platform.exit();
+
+
 
             }
 
