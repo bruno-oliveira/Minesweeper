@@ -1,8 +1,11 @@
 package gameLogic;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -18,14 +21,30 @@ public class StackedGameCell {
     public StackedGameCell(GameCell gameCell, Text cellText) {
         this.gameCell = gameCell;
         this.cellText = cellText;
-        gameCell.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        gameCell.setOnMouseClicked(mouseEvent -> {
+            if (!gameCell.isContainsMine()) {
+
                 gameCell.setOpacity(0.2);
                 cellTextVisible(true);
                 System.out.println("The number of neighbours is " + gameCell.getIndicator());
+                gameCell.setDisable(true); //can only click once in the same cell
+            } else {
+                gameCell.setFill(Color.RED);
+                Pane gameOver = new Pane();
+                Dialog<String> window = new Dialog<>();
+
+//                Button btn1 = new Button("Quit");
+//                btn1.setOnMouseClicked(mouseEvent1 -> Platform.exit());
+
+
+                window.getDialogPane().getButtonTypes().add(new ButtonType("Quit", ButtonBar.ButtonData.CANCEL_CLOSE));
+
+
+                window.setContentText("Game over");
+                window.showAndWait();
 
             }
+
         });
     }
 
