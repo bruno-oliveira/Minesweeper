@@ -19,11 +19,13 @@ public class StackedGameCell {
     private StackPane stackedCell;
     private GameCell gameCell;
     private Text cellText;
+    private boolean isClicked;
 
     public StackedGameCell(GameCell gameCell, Text cellText) {
         this.gameCell = gameCell;
         this.cellText = cellText;
         gameCell.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            setClicked(true);
             if (!gameCell.isContainsMine()) {
 
                 gameCell.setOpacity(0.2);
@@ -34,11 +36,12 @@ public class StackedGameCell {
                 gameCell.setFill(Color.RED);
                 Pane gameOver = new Pane();
                 Dialog<String> window = new Dialog<>();
-
                 window.getDialogPane().getButtonTypes().add(new ButtonType("Quit", ButtonBar.ButtonData.CANCEL_CLOSE));
                 window.setContentText("Game over");
                 window.showAndWait();
-
+                window.setOnShown(e -> {
+                    window.setContentText("aaa");
+                });
                 Platform.exit();
 
 
@@ -75,5 +78,13 @@ public class StackedGameCell {
 
     public void setStackedCell(StackPane stackedCell) {
         this.stackedCell = stackedCell;
+    }
+
+    public boolean isClicked() {
+        return isClicked;
+    }
+
+    public void setClicked(boolean clicked) {
+        isClicked = clicked;
     }
 }

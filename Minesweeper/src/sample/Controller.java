@@ -42,4 +42,18 @@ class Controller {
         getCellInPoz(i, j).setIndicator(totalBombs);
         // return totalBombs;
     }
+
+    public void checkWin() {
+        int count = 0;
+        int NBOMBS = 10;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (gameBoard[i][j].isClicked())
+                    count++;
+            }
+        }
+        if (count == 8 * 8 - NBOMBS) {
+            // WE WON THE GAME!!!!!!
+        }
+    }
 }

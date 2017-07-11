@@ -55,6 +55,8 @@ public class Main extends Application {
             }
         }
 
+        gameManager.checkWin();
+
         primaryStage.setScene(new Scene(root, 400, 400));
         primaryStage.show();
     }
