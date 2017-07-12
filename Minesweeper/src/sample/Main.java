@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -33,10 +34,11 @@ public class Main extends Application {
             int xPos = bomb % 8 - 1;
             int yPos = bomb / 8;
             gameBoard[xPos < 0 ? 8 - 1 : xPos][yPos].getGameCell().setContainsMine(true);
-            //  gameBoard[xPos < 0 ? 8 - 1 : xPos][yPos].getGameCell().setFill(Color.RED);
+            gameBoard[xPos < 0 ? 8 - 1 : xPos][yPos].getGameCell().setFill(Color.RED);
         }
 
         gameManager.setGameBoard(gameBoard);
+
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -55,7 +57,6 @@ public class Main extends Application {
             }
         }
 
-        gameManager.checkWin();
 
         primaryStage.setScene(new Scene(root, 400, 400));
         primaryStage.show();

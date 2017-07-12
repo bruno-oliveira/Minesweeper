@@ -21,7 +21,7 @@ class Controller {
         this.gameBoard = gameBoard;
     }
 
-    GameCell getCellInPoz(int i, int j) {
+    private GameCell getCellInPoz(int i, int j) {
         return this.gameBoard[i][j].getGameCell();
     }
 
@@ -31,9 +31,9 @@ class Controller {
     void neighbourBombsOf(int i, int j) {
         List<CellPosition> listOfNeighbours = getCellInPoz(i, j).getNeighbours();
         int totalBombs = 0;
-        for (int k = 0; k < listOfNeighbours.size(); k++) {
-            int i_of_neighb = listOfNeighbours.get(k).getI();
-            int j_of_neighb = listOfNeighbours.get(k).getJ();
+        for (CellPosition listOfNeighbour : listOfNeighbours) {
+            int i_of_neighb = listOfNeighbour.getI();
+            int j_of_neighb = listOfNeighbour.getJ();
             if (getCellInPoz(i_of_neighb, j_of_neighb).isContainsMine()) {
                 totalBombs++;
             }
@@ -48,12 +48,17 @@ class Controller {
         int NBOMBS = 10;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (gameBoard[i][j].isClicked())
+                if (gameBoard[i][j].isClicked()) {
                     count++;
+                    System.out.println("CURR COUNT IS " + count);
+                    if (count == 8 * 8 - NBOMBS) {
+                        System.out.println("GAME WON");
+                    }
+                }
             }
         }
         if (count == 8 * 8 - NBOMBS) {
-            // WE WON THE GAME!!!!!!
+            System.out.println("GAME WON");
         }
     }
 }

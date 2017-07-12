@@ -31,6 +31,7 @@ public class StackedGameCell {
                 gameCell.setOpacity(0.2);
                 cellTextVisible(true);
                 System.out.println("The number of neighbours is " + gameCell.getIndicator());
+                // checkWin(gameCell);
                 gameCell.setDisable(true); //can only click once in the same cell
             } else {
                 gameCell.setFill(Color.RED);
@@ -49,6 +50,25 @@ public class StackedGameCell {
             }
 
         });
+    }
+
+    public void checkWin(StackedGameCell[][] gameBoard) {
+        int count = 0;
+        int NBOMBS = 10;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (gameBoard[i][j].isClicked()) {
+                    count++;
+                    System.out.println("CURR COUNT IS " + count);
+                    if (count == 8 * 8 - NBOMBS) {
+                        System.out.println("GAME WON");
+                    }
+                }
+            }
+        }
+//        if (count == 8 * 8 - NBOMBS) {
+//            System.out.println("GAME WON");
+//        }
     }
 
     public void cellTextVisible(boolean visibility) {
@@ -84,7 +104,7 @@ public class StackedGameCell {
         return isClicked;
     }
 
-    public void setClicked(boolean clicked) {
+    private void setClicked(boolean clicked) {
         isClicked = clicked;
     }
 }
