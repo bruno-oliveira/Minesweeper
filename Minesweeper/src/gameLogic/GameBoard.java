@@ -12,8 +12,8 @@ import java.util.List;
 
 public class GameBoard {
 
-    private static int counterForGameState = 0;
     private final Pane root;
+    protected int counterForGameState = 0;
     private StackedGameCell[][] gameBoard;
 
     public GameBoard(StackedGameCell[][] board, Pane root) {
@@ -25,7 +25,7 @@ public class GameBoard {
         int[] bombs = BombPositionGenerator.getRandomFrom64();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                gameBoard[i][j] = new StackedGameCell(new GameCell(400 / 8 * i, 400 / 8 * j), new Text(""));
+                gameBoard[i][j] = new StackedGameCell(this, new GameCell(400 / 8 * i, 400 / 8 * j), new Text(""));
                 //gameBoard[i][j].setGameCell(new GameCell(400 / 8 * i, 400 / 8 * j));
             }
         }

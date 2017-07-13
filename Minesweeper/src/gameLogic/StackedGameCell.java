@@ -21,17 +21,18 @@ public class StackedGameCell {
     private Text cellText;
     private boolean isClicked;
 
-    public StackedGameCell(GameCell gameCell, Text cellText) {
+    public StackedGameCell(GameBoard gameBoard, GameCell gameCell, Text cellText) {
         this.gameCell = gameCell;
         this.cellText = cellText;
         gameCell.setOnMouseClicked((MouseEvent mouseEvent) -> {
             setClicked(true);
             if (!gameCell.isContainsMine()) {
-
+                // updateCounter(gameBoard.counterForGameState);
+                System.out.println("Counter is " + updateCounter(gameBoard, gameBoard.counterForGameState));
                 gameCell.setOpacity(0.2);
                 cellTextVisible(true);
                 System.out.println("The number of neighbours is " + gameCell.getIndicator());
-                // checkWin(gameCell);
+                checkWin(gameBoard);
                 gameCell.setDisable(true); //can only click once in the same cell
             } else {
                 gameCell.setFill(Color.RED);
@@ -52,23 +53,24 @@ public class StackedGameCell {
         });
     }
 
-    public void checkWin(StackedGameCell[][] gameBoard) {
-        int count = 0;
+    private int updateCounter(GameBoard board, int counterForGameState) {
+        board.counterForGameState++;
+        return board.counterForGameState;
+    }
+
+    public void checkWin(GameBoard gameBoard) {
         int NBOMBS = 10;
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (gameBoard[i][j].isClicked()) {
-                    count++;
-                    System.out.println("CURR COUNT IS " + count);
-                    if (count == 8 * 8 - NBOMBS) {
-                        System.out.println("GAME WON");
-                    }
-                }
-            }
+        if (gameBoard.counterForGameState == 8 * 8 - NBOMBS) {
+            Dialog<String> window = new Dialog<>();
+            window.getDialogPane().getButtonTypes().add(new ButtonType("Quit", ButtonBar.ButtonData.CANCEL_CLOSE));
+            window.setContentText("You won the game!!");
+            window.showAndWait();
+            window.setOnShown(e -> {
+                window.setContentText("aaa");
+            });
+            Platform.exit();
+
         }
-//        if (count == 8 * 8 - NBOMBS) {
-//            System.out.println("GAME WON");
-//        }
     }
 
     public void cellTextVisible(boolean visibility) {
