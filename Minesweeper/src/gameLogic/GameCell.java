@@ -14,7 +14,7 @@ public class GameCell extends Rectangle implements Discoverable {
     private int locationX;
     private int locationY;
 
-    public GameCell(int locationX, int locationY) {
+    GameCell(int locationX, int locationY) {
         super(400 / 8.0, 400 / 8.0, Color.LIGHTGREY);
         this.locationX = locationX;
         this.locationY = locationY;
@@ -30,7 +30,7 @@ public class GameCell extends Rectangle implements Discoverable {
     public List<CellPosition> getNeighbours() {
         int coordX = getLocationX() / (400 / 8);
         int coordY = getLocationY() / (400 / 8);
-        System.out.println("X: " + coordX + " -- Y: " + coordY);
+        //   System.out.println("X: " + coordX + " -- Y: " + coordY);
         List<Integer> xLeftToRightTopToBottom = new ArrayList<>(Arrays.asList(coordX - 1, coordX, coordX + 1,
                 coordX - 1, coordX + 1, coordX - 1, coordX, coordX + 1));
         List<Integer> yLeftToRightTopToBottom = new ArrayList<>(Arrays.asList(coordY - 1, coordY - 1, coordY - 1,
@@ -46,23 +46,23 @@ public class GameCell extends Rectangle implements Discoverable {
         return validNeighbours;
     }
 
-    public boolean isContainsMine() {
+    boolean isContainsMine() {
         return containsMine;
     }
 
-    public void setContainsMine(boolean containsMine) {
+    void setContainsMine(boolean containsMine) {
         this.containsMine = containsMine;
     }
 
-    public int getIndicator() {
+    int getIndicator() {
         return indicator;
     }
 
-    public void setIndicator(int indicator) {
+    void setIndicator(int indicator) {
         this.indicator = indicator;
     }
 
-    public int getLocationX() {
+    private int getLocationX() {
         return locationX;
     }
 
@@ -70,7 +70,7 @@ public class GameCell extends Rectangle implements Discoverable {
         this.locationX = locationX;
     }
 
-    public int getLocationY() {
+    private int getLocationY() {
         return locationY;
     }
 

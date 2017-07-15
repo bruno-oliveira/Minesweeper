@@ -5,7 +5,6 @@ import gameUtils.CellPosition;
 import generators.BombPositionGenerator;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.util.List;
@@ -33,7 +32,7 @@ public class GameBoard {
             int xPos = bomb % 8 - 1;
             int yPos = bomb / 8;
             gameBoard[xPos < 0 ? 8 - 1 : xPos][yPos].getGameCell().setContainsMine(true);
-            gameBoard[xPos < 0 ? 8 - 1 : xPos][yPos].getGameCell().setFill(Color.RED);
+            // gameBoard[xPos < 0 ? 8 - 1 : xPos][yPos].getGameCell().setFill(Color.RED);
         }
 
         for (int i = 0; i < 8; i++) {
@@ -58,7 +57,7 @@ public class GameBoard {
         return this.gameBoard[i][j].getGameCell();
     }
 
-    void neighbourBombsOf(int i, int j) {
+    private void neighbourBombsOf(int i, int j) {
         List<CellPosition> listOfNeighbours = getCellInPoz(i, j).getNeighbours();
         int totalBombs = 0;
         for (CellPosition listOfNeighbour : listOfNeighbours) {
