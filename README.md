@@ -13,3 +13,6 @@ Can also add an extra field to a cell: uncovered. A boolean. When the number of 
   
 *July 13th, 2017
   GameBoard class to manage the game has been created. It will allow a global "overview" on the state of each cell, which will allow to keep a counter to detect if the game has or has not been won. Each cell can not only know about itself or else the global game state will be impossible to keep track of. A game board is composed of StackedGameCells, and as such, each StackedGameCell individually will know the gameBoard class.
+  
+*July 15th, 2017
+  Released first alpha version. Will soon add more features to keep on working on this!
